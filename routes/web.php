@@ -15,13 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get("/", 'PageController@home')->name('home');
-Route::get("/article", 'PageController@article')->name('article');
-Route::get("/tag", 'PageController@tag')->name('tag');
 
-Route::resource('article', 'ArticleController');
-Route::resource('category', 'CategoryController');
-Route::resource('tag', 'TagController');
 
-Route::get("articles_api", 'PageController@articles_api')->name('article_api');
-Route::get("categories_api", 'PageController@categories_api')->name('category_api');
-Route::get("tags_api", 'PageController@tags_api')->name('tag_api');
+Route::resource('articles', 'ResourceController\ArticleController');
+// Route::resource('categories', 'ResourceController\CategoryController');
+// Route::resource('tags', 'ResourceController\TagController');
+
+// Route::get("articles_api", 'PageController@articles_api')->name('articles');
+// Route::get("categories_api", 'PageController@categories_api')->name('categories');
+// Route::get("tags_api", 'PageController@tags_api')->name('tags');

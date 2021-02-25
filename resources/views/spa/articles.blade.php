@@ -1,8 +1,12 @@
 @extends('layout.app');
 
+@section('headTitle')
+  Articles
+@endsection
+
 @section('main')
    <main>
-    IN QUESTA PAGIUNA ARTICOLI
+    IN QUESTA PAGINA SOLO ARTICOLI BELLI
    </main>
 @endsection
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ResourceController;
 
 use App\Article;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,7 +15,14 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        // $articles = Article::all();
+        $articles = Article::orderBy('id', 'desc')->get();
+
+        // $articles = Article::all()
+        //         ->orderBy('id', 'desc')
+        //         ->get();
+        // $articles = Article::latest()->get();
+        return view('tabsView.Articles.index', compact('articles'));
     }
 
     /**
@@ -24,7 +32,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+      return view('tabsView.Articles.create');
     }
 
     /**
@@ -35,29 +43,39 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+      $articles = new Article;
+      $articles -> title = request('title');
+      $articles -> body = request('body');
+      $articles -> author = request('author');
+      $articles -> categories = request('categories');
+      $articles -> tags = request('tags');
+      $articles -> save();
+
+
+      return redirect()->route('articles.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Article  $article
+     * @param  \App\Article  $post
      * @return \Illuminate\Http\Response
      */
     public function show(Article $article)
     {
-        //
+      return view('tabsView.Articles.show', compact('article'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Article  $article
+     * @param  \App\Article
      * @return \Illuminate\Http\Response
      */
     public function edit(Article $article)
     {
-        //
+      return view('tabsView.Articles.edit', compact('article'));
     }
 
     /**
@@ -69,7 +87,11 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+
+      $data = $request->all();
+      $article -> update($data);
+
+      return redirect()->route('articles.index');
     }
 
     /**
@@ -80,6 +102,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+      $article -> delete();
+      return redirect()->route('articles.index');
     }
 }

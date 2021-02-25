@@ -2,7 +2,7 @@
 
 @section('main')
    <main>
-
+     Sezione sulle categorie dei film
    </main>
 @endsection
 

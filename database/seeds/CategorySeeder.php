@@ -13,10 +13,11 @@ class CategorySeeder extends Seeder
      */
      public function run(Faker $faker)
      {
-       for ($i=0; $i < 15 ; $i++) {
+       for ($i=0; $i < 10 ; $i++) {
          $newCat = new Category();
-         $newCat->type = $faker->word();
-         $newCat->articles = $faker->sentence(6);
+         $newCat->name = $faker->word();
+         $newCat->description = $faker->sentence(10);
+         $newCat->img = $faker->imageUrl(360, 360, 'GattinoPuccioso', true);
          $newCat->save();
        }
      }
