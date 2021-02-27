@@ -48,8 +48,8 @@ class ArticleController extends Controller
       $articles -> title = request('title');
       $articles -> body = request('body');
       $articles -> author = request('author');
-      $articles -> categories = request('categories');
-      $articles -> tags = request('tags');
+      // $articles -> categories = request('categories');
+      // $articles -> tags = request('tags');
       $articles -> save();
 
 

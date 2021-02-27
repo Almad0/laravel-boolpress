@@ -18,11 +18,15 @@ class CreateArticlesTable extends Migration
             $table->string('title', 50);
             $table->text('body');
             $table->string('author');
-            $table->string('categories');
-            $table->string('tags');
+            // $table->string('categories');
+            // $table->string('tags');
             $table->timestamps();
         });
     }
+
+    // forma contratta bella SOLO IN CREAZIONE nullable()
+    // $table->foreignId('user_id')
+    //       ->constrained();
 
     /**
      * Reverse the migrations.

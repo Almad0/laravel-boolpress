@@ -6,7 +6,7 @@
   </head>
   <body>
     <h2>Modifica dell'articolo</h2>
-
+    
     <form class="Form container" action="{{ route('articles.update' , $article->id )}}" method="post">
       @csrf
       @method('PUT')

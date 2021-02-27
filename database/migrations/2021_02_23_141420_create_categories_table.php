@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->string('img');
             $table->timestamps();
         });
+      // ad inizio progetto metti la forumula per collegare la key è fatto
     }
 
     /**
