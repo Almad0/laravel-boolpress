@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\ResourceController;
 
 use App\Article;
+use App\Category;
+use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,12 +19,13 @@ class ArticleController extends Controller
     {
         // $articles = Article::all();
         $articles = Article::orderBy('id', 'desc')->get();
+        $categories= Category::all();
 
         // $articles = Article::all()
         //         ->orderBy('id', 'desc')
         //         ->get();
         // $articles = Article::latest()->get();
-        return view('tabsView.Articles.index', compact('articles'));
+        return view('tabsView.Articles.index', compact('articles', 'categories'));
     }
 
     /**
@@ -32,7 +35,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-      return view('tabsView.Articles.create');
+      $tags= Tag::all();
+      $categories= Category::all();
+      return view('tabsView.Articles.create', compact('tags', 'categories'));
     }
 
     /**
@@ -44,15 +49,26 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
 
-      $articles = new Article;
-      $articles -> title = request('title');
-      $articles -> body = request('body');
-      $articles -> author = request('author');
-      // $articles -> categories = request('categories');
-      // $articles -> tags = request('tags');
-      $articles -> save();
+      $validateData = $request->validate([
+        'title' => 'required',
+        'body' => 'required',
+        'author' => 'required',
+        'category_id' => 'required',
+        'tag_id' => 'required'
+      ]);
+      Article::create($validateData);
 
+      $articles = Article::orderBy('id', 'desc')->first();
 
+      // $articles = new Article;
+      // $articles -> title = request('title');
+      // $articles -> body = request('body');
+      // $articles -> author = request('author');
+      // // $articles -> categories = request('categories');
+      // // $articles -> tags = request('tags');
+      // $articles -> save();
+
+      $articles->tags()->attach($request->tags);
       return redirect()->route('articles.index');
     }
 
@@ -75,7 +91,10 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-      return view('tabsView.Articles.edit', compact('article'));
+      $categories = Category::all();
+      $tags = Tag::all();
+
+      return view('tabsView.Articles.edit', compact('article', 'categories', 'tags'));
     }
 
     /**
@@ -88,8 +107,15 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
 
-      $data = $request->all();
-      $article -> update($data);
+      $validatedData = $request->validate([
+        'title' => 'required',
+        'body' => 'required',
+        'author' => 'required',
+        'category_id' => 'required',
+        'tag_id' => 'required'
+      ]);
+      $article->update($validatedData);
+      $article->tags()->sync($request->tags);
 
       return redirect()->route('articles.index');
     }

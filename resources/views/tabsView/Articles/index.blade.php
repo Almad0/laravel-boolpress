@@ -20,14 +20,15 @@
 
       </thead>
       <tbody>
-        @foreach ($articles as $value)
+
+        @foreach ($articles as $value )
           <tr>
             <td scope="row">{{$value -> id}}</td>
             <td scope="row">{{$value -> title}}</td>
             <td scope="row">{{$value -> body}}</td>
             <td scope="row">{{$value -> author}}</td>
-            <td scope="row">{{$value -> categories}}</td>
-            <td scope="row">{{$value -> tags}}</td>
+            <td scope="row">{{$value -> category_id['name']}}</td>
+            <td scope="row">{{$value -> tag_id}}</td>
             <td>
               <button type="button" name="edit" class="btn-primary"><a href="{{ route('articles.show', ['article'=>$value->id])}}" class="text-light">Guarda</a></button>
               <button type="button" name="edit" class="btn-warning"><a href="{{ route('articles.edit', ['article'=>$value->id])}}" class="text-dark">Modifica</a></button>

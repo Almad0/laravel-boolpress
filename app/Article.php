@@ -11,15 +11,15 @@ class Article extends Model
 
   public function category()
     {
-      return $this->belongTo('App\Category');
+      return $this->belongsTo('App\Category', 'category_id');
     }
 
   public function tags()
     {
-      return $this->belongToMany(Tag::class);
+      return $this->belongsToMany(Tag::class);
       // return $this->belongToMany('App\Tag'); versione con il percoso se non è di default
     }
 
 
-  protected $fillable = ['title', 'body', 'author', 'categories', 'tags'];
+  protected $fillable = ['title', 'body', 'author', 'category_id', 'tag_id'];
 }

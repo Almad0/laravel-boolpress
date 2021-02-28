@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-  public function category()
+  public function article()
     {
-        return $this->belongToMany('App\Article');
+        return $this->belongsToMany('App\Article');
         // return $this->belongToMany('App\Tag');
     }
 

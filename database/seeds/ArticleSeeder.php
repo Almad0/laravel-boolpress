@@ -19,9 +19,25 @@ class ArticleSeeder extends Seeder
         $newArticle->title = $faker->word();
         $newArticle->body = $faker->sentence(10);
         $newArticle->author = $faker->word();
-        // $newArticle->categories = $faker->word();
-        // $newArticle->tags = $faker->words(5, true);
+        $newArticle->category_id = $faker->numberBetween(1, 5);
+        $newArticle->tag_id = $faker->numberBetween(1, 10);
         $newArticle->save();
       }
+
     }
+
+
+    // public function run()
+    //   {
+    //     DB::table('alpha')->delete();
+    //
+    //     Alpha::create( array(
+    //       'all'           =>  'all',
+    //       'your'          =>  'your',
+    //       'stuff'         =>  'stuff',
+    //     ))->beta()
+    //       ->attach( $idOfYourBeta );
+    //   }
+
+
 }
